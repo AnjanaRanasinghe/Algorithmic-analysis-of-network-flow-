@@ -2,12 +2,13 @@
  * Student ID: 20231160
  * UOW ID: w2051972
  * Name: A.A.S.Ranasinghe
- * Represents a flow network using an adjacency list.
+ * Coursework: Algorithmic Analysis of Network Flow
  */
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -16,7 +17,8 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         List<File> benchmarkFiles = getBenchmarkFiles();
 
-        while (true) {
+        boolean continueRunning = true;
+        while (continueRunning) {
             // Display menu
             System.out.println("\n=== Maximum Flow Benchmark Tester ===");
             System.out.println("Available benchmark files:");
@@ -27,14 +29,15 @@ public class Main {
             System.out.println("Enter a number (1-" + benchmarkFiles.size() + ") to select a file");
             System.out.println("Enter 'q' to quit");
 
-            // Get user input
+            // Get user input for file selection
             System.out.print("Your choice: ");
             String input = scanner.nextLine().trim();
 
             // Check for quit
             if (input.equalsIgnoreCase("q")) {
                 System.out.println("Exiting program.");
-                break;
+                continueRunning = false;
+                continue;
             }
 
             // Parse input as a number
@@ -49,36 +52,37 @@ public class Main {
                 File selectedFile = benchmarkFiles.get(choice - 1);
                 System.out.println("\nProcessing file: " + selectedFile.getName());
                 FlowNetwork network = NetworkParser.parse(selectedFile.getPath());
-                EdmondsKarp ek = new EdmondsKarp(network);
+                FordFulkerson ff = new FordFulkerson(network);
 
                 // Compute and print maximum flow
-                int maxFlow = ek.computeMaxFlow();
+                int maxFlow = ff.computeMaxFlow();
                 System.out.println("Maximum Flow: " + maxFlow);
 
                 // Print incremental steps
-                for (String step : ek.getSteps()) {
+                for (String step : ff.getSteps()) {
                     System.out.println(step);
                 }
 
+                // Ask if the user wants to continue
+                while (true) {
+                    System.out.println("\nWant to continue? (y/n): ");
+                    String continueChoice = scanner.nextLine().trim().toLowerCase();
+                    if (continueChoice.equals("y")) {
+                        break; // Continue the main loop
+                    } else if (continueChoice.equals("n")) {
+                        System.out.println("Exiting program.");
+                        continueRunning = false;
+                        break;
+                    } else {
+                        System.out.println("Invalid input. Please enter 'y' or 'n'.");
+                    }
+                }
             } catch (NumberFormatException e) {
                 System.out.println("Invalid input. Please enter a number or 'q' to quit.");
             } catch (Exception e) {
                 System.err.println("Error processing file: " + e.getMessage());
             }
-
-            System.out.println("\nWant to continue? (y/n): ");
-            String scn = scanner.nextLine().trim();
-
-            if (scn.equalsIgnoreCase("y")) {
-                continue;
-            }
-
-            if (scn.equalsIgnoreCase("n")) {
-                System.out.println("Exiting program.");
-                break;
-            }
         }
-
 
         scanner.close();
     }
@@ -97,9 +101,35 @@ public class Main {
             System.exit(1);
         }
 
-        // Sort files alphabetically
-        // Expected order: bridge_1.txt, bridge_2.txt, ..., bridge_19.txt, ladder_1.txt, ..., ladder_20.txt
-        Arrays.sort(files, (f1, f2) -> f1.getName().compareTo(f2.getName()));
+        // Custom sorting: bridge_1 to bridge_19, then ladder_1 to ladder_20
+        Arrays.sort(files, new Comparator<File>() {
+            @Override
+            public int compare(File f1, File f2) {
+                String name1 = f1.getName();
+                String name2 = f2.getName();
+
+                // Extract prefix (bridge or ladder)
+                String prefix1 = name1.split("_")[0];
+                String prefix2 = name2.split("_")[0];
+
+                // If prefixes differ, bridge comes before ladder
+                if (!prefix1.equals(prefix2)) {
+                    return prefix1.compareTo(prefix2); // "bridge" < "ladder"
+                }
+
+                // If prefixes are the same, sort by the numeric part
+                int num1 = extractNumber(name1);
+                int num2 = extractNumber(name2);
+                return Integer.compare(num1, num2);
+            }
+
+            // Extract the numeric part from the filename (e.g., "1" from "bridge_1.txt")
+            private int extractNumber(String filename) {
+                String numberPart = filename.split("_")[1].replace(".txt", "");
+                return Integer.parseInt(numberPart);
+            }
+        });
+
         List<File> fileList = new ArrayList<>(Arrays.asList(files));
 
         // Ensure we have exactly 39 files (19 bridge + 20 ladder)

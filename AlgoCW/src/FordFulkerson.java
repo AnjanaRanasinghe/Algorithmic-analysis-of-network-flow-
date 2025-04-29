@@ -2,26 +2,26 @@
  * Student ID: 20231160
  * UOW ID: w2051972
  * Name: A.A.S.Ranasinghe
- * Implements Edmonds-Karp algorithm for maximum flow.
+ * Implements the Ford-Fulkerson algorithm with BFS to compute maximum flow.
  */
 
 
 import java.util.*;
 
-public class EdmondsKarp {
+public class FordFulkerson {
     private FlowNetwork network;
     private int source;
     private int sink;
     private List<String> steps; // Stores incremental steps for output
 
-    public EdmondsKarp(FlowNetwork network) {
+    public FordFulkerson(FlowNetwork network) {
         this.network = network;
         this.source = 0;
         this.sink = network.getNumNodes() - 1;
         this.steps = new ArrayList<>();
     }
 
-    // BFS to find an augmenting path
+    // BFS to find an augmenting path (shortest path in terms of number of edges)
     private int[] bfs() {
         int[] parent = new int[network.getNumNodes()];
         Arrays.fill(parent, -1);
@@ -50,7 +50,7 @@ public class EdmondsKarp {
         steps.clear();
 
         while (true) {
-            // Find augmenting path
+            // Find augmenting path using BFS
             int[] parent = bfs();
             if (parent[sink] == -1) {
                 break; // No augmenting path
