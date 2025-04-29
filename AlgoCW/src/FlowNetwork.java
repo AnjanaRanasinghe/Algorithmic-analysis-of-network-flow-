@@ -8,8 +8,8 @@
 import java.util.*;
 
 public class FlowNetwork {
-    private int numNodes; // Number of nodes (0 to numNodes-1)
-    private List<Map<Integer, Edge>> adjList; // Adjacency list: node -> {dest -> Edge}
+    private int numNodes;                       // Number of nodes (0 to numNodes-1)
+    private List<Map<Integer, Edge>> adjList;   // Adjacency list: node -> {dest -> Edge}
 
     // Edge class to store capacity and flow
     static class Edge {

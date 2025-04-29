@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        List<File> benchmarkFiles = getBenchmarkFiles();
+        List<File> benchmarkFiles = getBenchmarkFiles();    // Load available benchmark input files
 
         boolean continueRunning = true;
         while (continueRunning) {
@@ -40,7 +40,7 @@ public class Main {
                 continue;
             }
 
-            // Parse input as a number
+            // Handle numeric file selection
             try {
                 int choice = Integer.parseInt(input);
                 if (choice < 1 || choice > benchmarkFiles.size()) {
@@ -48,13 +48,13 @@ public class Main {
                     continue;
                 }
 
-                // Process the selected file
+                // Load and parse the selected benchmark file
                 File selectedFile = benchmarkFiles.get(choice - 1);
                 System.out.println("\nProcessing file: " + selectedFile.getName());
                 FlowNetwork network = NetworkParser.parse(selectedFile.getPath());
                 FordFulkerson ff = new FordFulkerson(network);
 
-                // Compute and print maximum flow
+                // Run Ford-Fulkerson algorithm
                 int maxFlow = ff.computeMaxFlow();
                 System.out.println("Maximum Flow: " + maxFlow);
 
@@ -63,7 +63,7 @@ public class Main {
                     System.out.println(step);
                 }
 
-                // Ask if the user wants to continue
+                // Ask if the user wants to continue or not
                 while (true) {
                     System.out.println("\nWant to continue? (y/n): ");
                     String continueChoice = scanner.nextLine().trim().toLowerCase();
@@ -87,7 +87,12 @@ public class Main {
         scanner.close();
     }
 
-    // Retrieve and sort benchmark files from the benchmarks folder
+
+    /**
+     * Retrieves and sorts benchmark files from the "benchmarks" directory.
+     * Sorting ensures 'bridge_1' to 'bridge_19' appear before 'ladder_1' to 'ladder_20'.
+     * @return list of sorted benchmark files
+     */
     private static List<File> getBenchmarkFiles() {
         File benchmarkDir = new File("benchmarks");
         if (!benchmarkDir.exists() || !benchmarkDir.isDirectory()) {
