@@ -30,7 +30,7 @@ public class FordFulkerson {
     private int[] bfs() {
         int[] parent = new int[network.getNumNodes()];
         Arrays.fill(parent, -1);          // Initialize all nodes as unvisited
-        Queue<Integer> queue = new LinkedList<>();
+        Queue<Integer> queue = new LinkedList<>();   // Creates a queue for BFS, using LinkedList
         queue.add(source);
         parent[source] = source;    // Mark source as visited by pointing to itself
 
