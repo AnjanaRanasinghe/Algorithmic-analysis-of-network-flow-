@@ -61,7 +61,7 @@ public class FordFulkerson {
         steps.clear();       // Clear previous steps before starting a new computation
 
         while (true) {
-            // Find augmenting path using BFS
+            // Find augmenting path using called bfs function
             int[] parent = bfs();
             if (parent[sink] == -1) {
                 break; // No augmenting path, maximum flow reached
