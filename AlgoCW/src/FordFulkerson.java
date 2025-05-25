@@ -35,13 +35,16 @@ public class FordFulkerson {
         parent[source] = source;    // Mark source as visited by pointing to itself
 
         while (!queue.isEmpty()) {
-            int u = queue.poll();
-            for (Map.Entry<Integer, FlowNetwork.Edge> entry : network.getEdges(u).entrySet()) {
-                int v = entry.getKey();
-                FlowNetwork.Edge edge = entry.getValue();
+            int u = queue.poll();    // removes the head (first element)
+            for (Map.Entry<Integer, FlowNetwork.Edge> entry : network.getEdges(u).entrySet()) {   // Iterates over all edges from node u
+                int v = entry.getKey();     // Gets the destination node v of the edge
+                FlowNetwork.Edge edge = entry.getValue();       // Gets the Edge object, which contains capacity and flow
+
                 // Check if edge has residual capacity and node is unvisited
+                // parent[v] == -1: Ensures node v hasn’t been visited
+                // edge.capacity - edge.flow > 0: Ensures the edge has residual capacity, meaning more flow can be pushed from u to v
                 if (parent[v] == -1 && edge.capacity - edge.flow > 0) {
-                    parent[v] = u;
+                    parent[v] = u;   // Sets u as the parent of v, recording the path
                     queue.add(v);
                 }
             }
