@@ -24,7 +24,7 @@ public class NetworkParser {
             throw new Exception("Invalid input: Number of nodes expected");
         }
         int numNodes = scanner.nextInt();
-        FlowNetwork network = new FlowNetwork(numNodes);
+        FlowNetwork network = new FlowNetwork(numNodes);  // Creates a new FlowNetwork with the specified number of nodes
 
         // Read edges from the file
         while (scanner.hasNextInt()) {

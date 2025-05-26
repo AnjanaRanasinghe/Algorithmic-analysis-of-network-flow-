@@ -13,8 +13,8 @@ public class FlowNetwork {
 
     // Edge class to store capacity and flow
     static class Edge {
-        int capacity;
-        int flow;
+        int capacity;   // The maximum flow that can pass through the edge
+        int flow;   // The current flow assigned to the edge, initialized to 0
         int dest; // Destination node
 
         Edge(int dest, int capacity) {
