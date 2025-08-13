@@ -20,10 +20,14 @@ Output: Displays augmenting paths and flow increments, as demonstrated in the re
 
 Performance: Time complexity of O(V·E²) and space complexity of O(V + E), optimized for sparse graphs.
 
+---
+
 ## Prerequisites
 
 Java Development Kit (JDK) 8 or higher
 Any IDE or text editor (e.g., IntelliJ IDEA, VS Code)
+
+---
 
 ## Installation
 Clone the repository:git clone https://github.com/yourusername/max-flow-solver.git
@@ -34,39 +38,32 @@ Compile and run the Java program:javac src/*.java
 
 java src/Main
 
+---
+
 ## Usage
 Run the program to access the menu.
+
 Select a benchmark file from the provided list (e.g., bridge_1.txt).
+
 The program computes the maximum flow and outputs the augmenting paths and flow increments.
+
 Refer to the demo video in the demo/ folder for a visual walkthrough.
 
-Example
-For the benchmark bridge_1.txt (6 nodes, source: 0, sink: 5):
+---
 
-Maximum flow: 5 units
-Augmenting paths:
-Path 1: [0, 1, 5] → Flow: 1 unit
-Path 2: [0, 1, 4, 5] → Flow: 1 unit
-Path 3: [0, 1, 3, 4, 5] → Flow: 1 unit
-Path 4: [0, 1, 2, 3, 4, 5] → Flow: 1 unit
+## Example
 
+<img width="584" height="223" alt="image" src="https://github.com/user-attachments/assets/bdb92bfe-1a34-426a-817f-56b17a30d708" />
 
+---
 
-Performance Analysis
+## Performance Analysis
 
 Time Complexity: O(V·E²), where V is the number of nodes and E is the number of edges.
 Space Complexity: O(V + E) for the adjacency list and BFS queue.
 Optimized for sparse graphs with O(1) edge lookups using HashMap.
 
-Demo Video
-A demo video is included in the demo/ folder, showcasing the solver's functionality on sample benchmarks. It demonstrates file selection, flow computation, and output of augmenting paths.
-Report
-The full project report (w2051972_A.A.S.Ranasinghe_Report.pdf) is available in the docs/ folder. It includes:
-
-Introduction to the project
-Explanation of data structures and algorithm choices
-Example run on bridge_1.txt
-Detailed performance analysis
+---
 
 Acknowledgments
 
