@@ -1,9 +1,11 @@
 # Maximum Flow Solver
 
 This repository contains my coursework project for the Algorithms: Theory, Design and Implementation module at the Informatics Institute of Technology, part of the BSc (Hons) Computer Science program. The project implements a maximum flow solver using the Ford-Fulkerson algorithm with Breadth-First Search (BFS) to compute the maximum flow in a directed graph.
+---
 
 ## Project Overview
 The goal of this project was to design and implement a maximum flow solver for directed graphs, tested on 39 benchmark files. The implementation includes a user-friendly menu to select benchmark files, compute the maximum flow, and display augmenting paths and flow increments. The solver uses efficient data structures and algorithms to ensure performance and clarity in output.
+---
 
 ## Key Features
 Algorithm: Ford-Fulkerson with BFS for finding the shortest augmenting paths.
