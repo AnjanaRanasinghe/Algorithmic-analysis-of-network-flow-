@@ -10,15 +10,15 @@ The goal of this project was to design and implement a maximum flow solver for d
 ---
 
 ## Key Features
-Algorithm: Ford-Fulkerson with BFS for finding the shortest augmenting paths.
+**Algorithm:** Ford-Fulkerson with BFS for finding the shortest augmenting paths.
 
-Data Structure: Adjacency list using ArrayList and HashMap for O(1) edge lookups and updates.
+**Data Structure:** Adjacency list using ArrayList and HashMap for O(1) edge lookups and updates.
 
-Input Handling: Supports 39 benchmark files (e.g., bridge_1.txt) with a menu-driven interface.
+**Input Handling:** Supports 39 benchmark files (e.g., bridge_1.txt) with a menu-driven interface.
 
-Output: Displays augmenting paths and flow increments, as demonstrated in the report (e.g., max flow of 5 for bridge_1.txt).
+**Output:** Displays augmenting paths and flow increments, as demonstrated in the report (e.g., max flow of 5 for bridge_1.txt).
 
-Performance: Time complexity of O(V·E²) and space complexity of O(V + E), optimized for sparse graphs.
+**Performance:** Time complexity of O(V·E²) and space complexity of O(V + E), optimized for sparse graphs.
 
 ---
 
