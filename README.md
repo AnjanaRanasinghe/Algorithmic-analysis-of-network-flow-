@@ -7,39 +7,30 @@ The goal of this project was to design and implement a maximum flow solver for d
 
 ## Key Features
 Algorithm: Ford-Fulkerson with BFS for finding the shortest augmenting paths.
+
 Data Structure: Adjacency list using ArrayList and HashMap for O(1) edge lookups and updates.
+
 Input Handling: Supports 39 benchmark files (e.g., bridge_1.txt) with a menu-driven interface.
+
 Output: Displays augmenting paths and flow increments, as demonstrated in the report (e.g., max flow of 5 for bridge_1.txt).
+
 Performance: Time complexity of O(V·E²) and space complexity of O(V + E), optimized for sparse graphs.
 
-Repository Structure
-
-src/: Source code for the maximum flow solver implemented in Java.
-benchmarks/: Directory containing the 39 benchmark files (e.g., bridge_1.txt).
-docs/: Project report (w2051972_A.A.S.Ranasinghe_Report.pdf) detailing the implementation, algorithm, and performance analysis.
-demo/: Demo video showcasing the solver in action on sample benchmarks.
-
-Getting Started
-Prerequisites
+## Prerequisites
 
 Java Development Kit (JDK) 8 or higher
 Any IDE or text editor (e.g., IntelliJ IDEA, VS Code)
 
-Installation
-
+## Installation
 Clone the repository:git clone https://github.com/yourusername/max-flow-solver.git
-
 
 Navigate to the project directory:cd max-flow-solver
 
-
 Compile and run the Java program:javac src/*.java
+
 java src/Main
 
-
-
-Usage
-
+## Usage
 Run the program to access the menu.
 Select a benchmark file from the provided list (e.g., bridge_1.txt).
 The program computes the maximum flow and outputs the augmenting paths and flow increments.
